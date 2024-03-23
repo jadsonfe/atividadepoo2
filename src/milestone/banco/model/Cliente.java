@@ -29,7 +29,14 @@ public class Cliente {
      */
     public boolean adicionarConta(Conta conta) {
         
-    	return false;
+    	 if (contas == null) {
+    	        contas = new ArrayList<>();
+    	    }
+    	    if (!contas.contains(conta)) {
+    	        contas.add(conta);
+    	        return true;
+    	    }
+    	    return false;
     }
 
     /*
@@ -41,7 +48,12 @@ public class Cliente {
      */
     public boolean removerConta(String numeroConta) {
         
-    	return false;
+    	Conta conta = localizarConta(numeroConta);
+        if (conta != null) {
+            contas.remove(conta);
+            return true;
+        }
+        return false;
     }
 
     /*
@@ -53,7 +65,12 @@ public class Cliente {
      */
     public Conta localizarConta(String numeroConta) {
         
-    	return null;
+    	 for (Conta conta : contas) {
+    	        if (conta.getNumero().equals(numeroConta)) {
+    	            return conta;
+    	        }
+    	    }
+    	    return null;
     }
     
 

@@ -39,7 +39,11 @@ public class Conta {
      * throw new IllegalArgumentException("Saldo insuficiente ou conta inativa.");
      */
     public void sacar(BigDecimal valor) {
-        
+    	   if (status && valor.compareTo(BigDecimal.ZERO) > 0 && saldo.compareTo(valor) >= 0) {
+    	        saldo = saldo.subtract(valor);
+    	    } else {
+    	        throw new IllegalArgumentException("Saldo insuficiente ou conta inativa.");
+    	    }
     }
 
     /*
@@ -50,7 +54,11 @@ public class Conta {
      * throw new IllegalArgumentException("Saldo insuficiente ou conta inativa.");
      */
     public void depositar(BigDecimal valor) {
-        
+        if (status && valor.compareTo(BigDecimal.ZERO) > 0) {
+            saldo = saldo.add(valor);
+        } else {
+            throw new IllegalArgumentException("Saldo insuficiente ou conta inativa.");
+        }
     }
 
     /*
@@ -63,7 +71,12 @@ public class Conta {
      * throw new IllegalArgumentException("Saldo insuficiente ou conta inativa.");
      */
     public void transferir(Conta destino, BigDecimal valor) {
-        
+    	   if (this.status && destino.status && valor.compareTo(BigDecimal.ZERO) > 0 && saldo.compareTo(valor) >= 0) {
+    	        saldo = saldo.subtract(valor);
+    	        destino.saldo = destino.saldo.add(valor);
+    	    } else {
+    	        throw new IllegalArgumentException("Saldo insuficiente ou conta inativa.");
+    	    }
     }
     
     //Não alterar os métodos abaixo 
